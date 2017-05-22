@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Pamadon/WhatDoYouThinkOfUS/issues"
   },
-  "homepage": "https://github.com/Pamadon/WhatDoYouThinkOfUS#readme"
+  "homepage": "https://github.com/Pamadon/WhatDoYouThinkOfUS#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0"
+  }
 }
