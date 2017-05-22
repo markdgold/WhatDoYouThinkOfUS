@@ -1,0 +1,19 @@
+{
+  "name": "whatdoyouthinkofus",
+  "version": "1.0.0",
+  "description": "heat map for world percept of US",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pamadon/WhatDoYouThinkOfUS.git"
+  },
+  "author": "Peter Amadon - Mark Goldstein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pamadon/WhatDoYouThinkOfUS/issues"
+  },
+  "homepage": "https://github.com/Pamadon/WhatDoYouThinkOfUS#readme"
+}
