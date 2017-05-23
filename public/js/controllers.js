@@ -1,13 +1,15 @@
 angular.module('MainCtrls', ['NewsServices'])
 	.controller('ArticlesCtrl', ['$scope', '$http', 'ArticlesFactory', function($scope, $http, ArticlesFactory){
-			$scope.article = {};
-			$scope.articles = [];
-			$scope.watsonData = {};
+			$scope.allArticles = [];
+			var sources = ['al-jazeera-english', 'bbc-news', 'handelsblatt', 'spiegel-online', 'reuters', 'the-hindu', 'abc-news-au', 'the-new-york-times', 'the-times-of-india']
 			var alJazeera = 'al-jazeera-english';
 
-			ArticlesFactory.get({source: alJazeera}, function success(data){
-				$scope.article = data;
-				$scope.articles.push(data)
-				console.log('success', $scope.articles);
-			});
+		sources.forEach(source=>{
+			for(var i=0; i < 5; i++){
+				ArticlesFactory.get({source: source, number: i}, function success(data){
+					$scope.allArticles.push(data);
+					console.log('success', $scope.allArticles);
+				});
+			}
+		})
 	}]);

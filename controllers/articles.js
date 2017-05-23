@@ -13,18 +13,19 @@ var natural_language_understanding = new NaturalLanguageUnderstandingV1({
   'password': nluPass,
   'version_date': '2017-02-27'
 });
-var articleData={};
-var watsonData={};
 
+var articleSource = {
+	source: ""
+};
 
-router.route('/:source')
+router.route('/:source/:number')
 .get(function(req,res){
 	async.waterfall([
     function(callback) {
-        request(`https://newsapi.org/v1/articles?source=${req.params.source}&sortBy=latest&apiKey=${newsApi}`, function(error, response, body){
+        request(`https://newsapi.org/v1/articles?source=${req.params.source}&apiKey=${newsApi}`, function(error, response, body){
 					if (error) console.log(error);
-					articleData = JSON.parse(response.body).articles[0];
-	        callback(null, articleData)
+					articleSource.source = JSON.parse(response.body).source;
+	        callback(null, JSON.parse(response.body).articles[req.params.number]);
 				});
     },
     function(article, callback) {
@@ -39,13 +40,13 @@ router.route('/:source')
 				    if (err)
 				      console.log('error:', err);
 				    else
-				      watsonData = response;
-     			    callback(null, watsonData);
+				      var watsonData = response;
+  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
+     			    callback(null, articleWithSent);
 				  });
     }],
   function (err, result) {
-  	var articleSentiment = Object.assign({}, articleData, watsonData);
-		res.send(articleSentiment)
+		res.send(result);
 	});
 })
 
