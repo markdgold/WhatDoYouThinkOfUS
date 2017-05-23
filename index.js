@@ -28,7 +28,7 @@ app.use('/api/articles', require('./controllers/articles'));
 app.use('/api/sentiments', require('./controllers/sentiments'));
 
 app.get('/*', function(req, res) {
-   res.sendFile(path.join(__dirname, 'public/index.html'));
+	res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.listen(3000);
