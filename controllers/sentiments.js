@@ -28,6 +28,6 @@ router.route('/:url')
       sentiment = JSON.stringify(response, null, 2);
   res.send(sentiment);
   });
-})
+});
 
 module.exports = router;

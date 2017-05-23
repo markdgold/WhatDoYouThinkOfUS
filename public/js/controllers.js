@@ -20,4 +20,7 @@ angular.module('MainCtrls', ['NewsServices'])
 				$scope.sentiment = data.sentiment.document;
 			})
 
-	}]);
+
+	}])
+
+
