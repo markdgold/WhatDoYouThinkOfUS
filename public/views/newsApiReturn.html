@@ -1,4 +1,6 @@
 <h1>HELLO</h1>
+<div class="well">
+
 <div>
 	Title: {{article.title}}
 </div>
@@ -9,11 +11,12 @@
 	URL: {{article.url}}
 </div>
 <div>
-	Sentiment Label: {{watsonData.sentiment.document.label}}
+	Sentiment Label: {{article.sentiment.document.label}}
 </div>
 <div>
-	Sentiment score: {{watsonData.sentiment.document.score}}
+	Sentiment score: {{article.sentiment.document.score}}
 </div>
 <div>
-	Emotions: {{watsonData.emotion.document.emotion.sadness}}
+	Emotions: {{article.emotion.document.emotion.sadness}}
+</div>
 </div>

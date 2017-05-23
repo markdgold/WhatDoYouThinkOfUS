@@ -1,16 +1,13 @@
 angular.module('MainCtrls', ['NewsServices'])
-	.controller('ArticlesCtrl', ['$scope', '$http', 'ArticlesFactory', 'SentimentFactory', function($scope, $http, ArticlesFactory, SentimentFactory){
+	.controller('ArticlesCtrl', ['$scope', '$http', 'ArticlesFactory', function($scope, $http, ArticlesFactory){
 			$scope.article = {};
+			$scope.articles = [];
 			$scope.watsonData = {};
 			var alJazeera = 'al-jazeera-english';
 
 			ArticlesFactory.get({source: alJazeera}, function success(data){
-				$scope.article = data.articles[0];
-
+				$scope.article = data;
+				$scope.articles.push(data)
+				console.log('success', $scope.articles);
 			});
-			SentimentFactory.get({url: 'http://www.aljazeera.com/news/2017/05/uk-police-confirmed-fatalities-manchester-concert-170522230211269.html'}, function success(data){
-				console.log('sentimentfact data', data);
-				$scope.watsonData = data;
-			})
-
 	}]);
