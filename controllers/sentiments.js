@@ -16,17 +16,18 @@ router.route('/:url')
   var parameters = {
     'url': req.params.url,
     'features': {
-      'sentiment': {}
+      'sentiment': {},
+      'emotion': {}
     }
   };
-  var sentiment={};
+  var watsonData={};
   natural_language_understanding.analyze(parameters, function(err, response) {
     if (err)
       console.log('error:', err);
     else
       console.log(JSON.stringify(response, null, 2));
-      sentiment = JSON.stringify(response, null, 2);
-  res.send(sentiment);
+      watsonData = JSON.stringify(response, null, 2);
+  res.send(watsonData);
   });
 })
 

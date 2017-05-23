@@ -9,9 +9,11 @@
 	URL: {{article.url}}
 </div>
 <div>
-	Sentiment Label: {{sentiment.label}}
+	Sentiment Label: {{watsonData.sentiment.document.label}}
 </div>
 <div>
-	Sentiment score: {{sentiment.score}}
+	Sentiment score: {{watsonData.sentiment.document.score}}
 </div>
-
+<div>
+	Emotions: {{watsonData.emotion.document.emotion.sadness}}
+</div>
