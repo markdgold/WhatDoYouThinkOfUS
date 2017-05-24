@@ -5,6 +5,7 @@ angular.module('MainCtrls', ['NewsServices'])
 			var sources = ['al-jazeera-english', 'bbc-news', 'handelsblatt', 'spiegel-online', 'reuters', 'the-hindu', 'abc-news-au', 'the-new-york-times', 'the-times-of-india']
 			var alJazeera = 'al-jazeera-english';
 
+
 				ArticlesFactory.get(function success(data){
 					$scope.allArticles=JSON.stringify(data);
 					console.log('success', $scope.allArticles);
