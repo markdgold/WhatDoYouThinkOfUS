@@ -23,7 +23,7 @@ angular.module('MainCtrls', ['NewsServices'])
 			        "title": "Austria",
 			        "id": "AT",
 			        "color": $scope.white,
-			        "customData": "1995",
+			        "customData": '',
 			        "groupId": "before2004"
 			      }, {
 			        "title": "Ireland",

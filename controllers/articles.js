@@ -30,12 +30,13 @@ router.route('/')
 	};
 	var j=Object.keys(sources);
 	for(var i=0; i<j; i++){
-		var country = sources[Object.keys(sources)[i]];
-		var source =  Object.keys(sources)[i];
+		var country = sources[Object.keys(sources)[0]];
+		var source =  Object.keys(sources)[0];
 		console.log('source------------', source)
 		console.log('country------------', country)
 		Country.findOne({title: country}, function (err, doc){
-			doc.articles = [];
+
+			doc.articles = ["hi"];
 
 
 			var articleSource = {
@@ -67,7 +68,8 @@ router.route('/')
 						      var watsonData = response;
 		  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
 		  						//allArticles.push(articleWithSent);
-									doc.articles.push(articleWithSent);
+									//doc.articles.push(articleWithSent);
+									$scope.germany = doc;
 									doc.save();
 		     			    concatCallback(null, articleWithSent);
 						  });
@@ -82,7 +84,7 @@ router.route('/')
 			);
 
 		});
-	}
+}
 });
 
 
