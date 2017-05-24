@@ -26,22 +26,19 @@ router.route('/')
 
 	var sources ={
 		'bbc-news': 'GreatBritain',
-		'handelsblatt': 'Germany',
+		'spiegel-online': 'Germany',
 	};
-	var j=Object.keys(sources);
-	for(var i=0; i<j; i++){
-		var country = sources[Object.keys(sources)[i]];
-		var source =  Object.keys(sources)[i];
+	//var j=Object.keys(sources);
+	//for(var i=0; i<j; i++){
+		var country = sources[Object.keys(sources)[0]];
+		var source =  Object.keys(sources)[0];
 		console.log('source------------', source)
 		console.log('country------------', country)
 		Country.findOne({title: country}, function (err, doc){
 			doc.articles = [];
-
-
 			var articleSource = {
 				source: ""
 			};
-			//var allArticles = [];
 
 			async.waterfall([
 		    function(waterCallbackOne) {
@@ -66,23 +63,21 @@ router.route('/')
 						    else
 						      var watsonData = response;
 		  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
-		  						//allArticles.push(articleWithSent);
-									doc.articles.push(articleWithSent);
-									doc.save();
-		     			    concatCallback(null, articleWithSent);
+		  						concatCallback(null, articleWithSent);
 						  });
 						},function(err, result){
-							console.log('concat result', result);
 							 waterCallbackTwo(null, result);
 						});
 		    }],
 		  	function (err, result) {
 					console.log('waterfall result', result);
+					doc.articles = result
+					doc.save();
 				}
 			);
 
 		});
-	}
+	//}
 });
 
 
