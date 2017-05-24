@@ -17,54 +17,72 @@ var natural_language_understanding = new NaturalLanguageUnderstandingV1({
   'version_date': '2017-02-27'
 });
 
-var articleSource = {
-	source: ""
-};
 
-router.route('/:source/:number')
+
+
+
+router.route('/')
 .get(function(req,res){
 
-Country.findOne({title: 'Germany'}, function (err, doc){
-	doc.articles = [];
+	var sources ={
+		'bbc-news': 'GreatBritain',
+		'handelsblatt': 'Germany',
+	};
+	var j=Object.keys(sources);
+	for(var i=0; i<j; i++){
+		var country = sources[Object.keys(sources)[i]];
+		var source =  Object.keys(sources)[i];
+		console.log('source------------', source)
+		console.log('country------------', country)
+		Country.findOne({title: country}, function (err, doc){
+			doc.articles = [];
 
-		console.log(doc);
-		doc.save();
-});
-	async.waterfall([
-    function(callback) {
-        request(`https://newsapi.org/v1/articles?source=${req.params.source}&apiKey=${newsApi}`, function(error, response, body){
-					if (error) console.log(error);
-					articleSource.source = JSON.parse(response.body).source;
-	        callback(null, JSON.parse(response.body).articles[req.params.number]);
-				});
-    },
-    function(article, callback) {
-				  var parameters = {
-				    'url': article.url,
-				    'features': {
-				      'sentiment': {},
-				      'emotion': {}
-				    }
-				  };
-				  natural_language_understanding.analyze(parameters, function(err, response) {
-				    if (err)
-				      console.log('error:', err);
-				    else
-				      var watsonData = response;
-  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
-     			    callback(null, articleWithSent);
-				  });
-    }],
-  	function (err, result) {
 
-			Country.findOne({title: 'Germany'}, function (err, doc){
-				doc.articles.push(result);
-				console.log(doc);
-				doc.save();
+			var articleSource = {
+				source: ""
+			};
+			//var allArticles = [];
 
-				});
-			res.send(result);
+			async.waterfall([
+		    function(waterCallbackOne) {
+		        request(`https://newsapi.org/v1/articles?source=${source}&apiKey=${newsApi}`, function(error, response, body){
+							if (error) console.log(error);
+							articleSource.source = JSON.parse(response.body).source;
+			        waterCallbackOne(null, JSON.parse(response.body).articles);
+						});
+		    },
+		    function(articles, waterCallbackTwo){
+		    	async.concat(articles, function(article, concatCallback){
+		    		var parameters = {
+						    'url': article.url,
+						    'features': {
+						      'sentiment': {},
+						      'emotion': {}
+						    }
+						  };
+						  natural_language_understanding.analyze(parameters, function(err, response) {
+						    if (err)
+						      console.log('error:', err);
+						    else
+						      var watsonData = response;
+		  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
+		  						//allArticles.push(articleWithSent);
+									doc.articles.push(articleWithSent);
+									doc.save();
+		     			    concatCallback(null, articleWithSent);
+						  });
+						},function(err, result){
+							console.log('concat result', result);
+							 waterCallbackTwo(null, result);
+						});
+		    }],
+		  	function (err, result) {
+					console.log('waterfall result', result);
+				}
+			);
+
 		});
+	}
 });
 
 
