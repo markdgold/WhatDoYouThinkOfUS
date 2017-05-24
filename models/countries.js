@@ -12,20 +12,19 @@ var CountriesSchema = mongoose.Schema({
 CountriesSchema.set('toJSON', {
     transform: function(doc, ret, options) {
         var returnJson = {
-            title: ret.title,
-            id: ret.id,
-            color: ret.color,
-            groupId: ret.groupId,
-            articles: ret.articles
-        };
-				console.log(returnJson)
+
+            "title": ret.title,
+            "id": ret.id,
+            "color": ret.color,
+            "groupId": ret.groupId
+
+			};
+				console.log(returnJson);
         return returnJson;
     }
 });
 
-CountriesSchema.methods.sayHello = function() {
-  return "Hi " + this.title;
-};
+
 
 
 

@@ -23,6 +23,7 @@ var natural_language_understanding = new NaturalLanguageUnderstandingV1({
 
 router.route('/')
 .get(function(req,res){
+
 	var sources ={
 		'bbc-news': 'GreatBritain',
 		'handelsblatt': 'Germany',
@@ -35,6 +36,7 @@ router.route('/')
 		console.log('country------------', country)
 		Country.findOne({title: country}, function (err, doc){
 			doc.articles = [];
+
 
 			var articleSource = {
 				source: ""

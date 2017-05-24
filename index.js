@@ -5,18 +5,22 @@ var path = require('path');
 var async = require('async');
 var app = express();
 var Country = require('./models/countries');
+var morgan = require('morgan');
+
 
 var mongoose = require('mongoose');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(morgan('dev'));
 mongoose.connect('mongodb://localhost/whatdoyou');
 
 
 Country.find({}, function(err, docs){
 if(!err){
-	//console.log(docs);
+
+	// console.log(JSON.stringify(docs));
+
 
 }else {throw err;}
 });
