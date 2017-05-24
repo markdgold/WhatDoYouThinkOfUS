@@ -6,10 +6,21 @@ var CountriesSchema = mongoose.Schema({
     color: String,
     customData: Number,
     groupId: Number,
-		articles: [{
-			title: String,
-			score: Number
-}]
+		articles: [{}]
+});
+
+CountriesSchema.set('toJSON', {
+    transform: function(doc, ret, options) {
+        var returnJson = {
+            title: ret.title,
+            id: ret.id,
+            color: ret.color,
+            groupId: ret.groupId,
+            articles: ret.articles
+        };
+				console.log(returnJson)
+        return returnJson;
+    }
 });
 
 CountriesSchema.methods.sayHello = function() {

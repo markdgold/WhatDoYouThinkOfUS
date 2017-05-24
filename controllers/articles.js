@@ -3,6 +3,9 @@ var request = require('request');
 var router = express.Router();
 var newsApi = process.env.NEWSAPI;
 var async = require('async');
+var Country = require('../models/countries');
+var mongoose = require('mongoose');
+
 
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 var nluUsername = process.env.NLUUSER;
@@ -20,6 +23,12 @@ var articleSource = {
 
 router.route('/:source/:number')
 .get(function(req,res){
+Country.findOne({title: 'Germany'}, function (err, doc){
+	doc.articles = [];
+
+		console.log(doc);
+		doc.save();
+});
 	async.waterfall([
     function(callback) {
         request(`https://newsapi.org/v1/articles?source=${req.params.source}&apiKey=${newsApi}`, function(error, response, body){
@@ -45,9 +54,16 @@ router.route('/:source/:number')
      			    callback(null, articleWithSent);
 				  });
     }],
-  function (err, result) {
-		res.send(result);
-	});
-})
+  	function (err, result) {
+
+			// Country.findOne({title: 'Germany'}, function (err, doc){
+			// 	doc.articles.push(result);
+			// 	console.log(doc);
+			// 	doc.save();
+ 				res.send(result);
+			// });
+		});
+});
+
 
 module.exports = router;

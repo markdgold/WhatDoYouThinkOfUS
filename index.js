@@ -17,7 +17,7 @@ mongoose.connect('mongodb://localhost/whatdoyou');
 Country.find({}, function(err, docs){
 if(!err){
 	console.log(docs);
-process.exit();
+
 }else {throw err;}
 });
 
