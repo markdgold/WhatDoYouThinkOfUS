@@ -1,17 +1,22 @@
 <h1>HELLO</h1>
+<div class="well" ng-repeat="article in allArticles">
+
 <div>
 	Title: {{article.title}}
 </div>
 <div>
-	Author: {{article.author}}
+	Source: {{article.source}}
 </div>
 <div>
 	URL: {{article.url}}
 </div>
 <div>
-	Sentiment Label: {{sentiment.label}}
+	Sentiment Label: {{article.sentiment.document.label}}
 </div>
 <div>
-	Sentiment score: {{sentiment.score}}
+	Sentiment score: {{article.sentiment.document.score}}
 </div>
-
+<div>
+	Emotions: {{article.emotion.document.emotion.sadness}}
+</div>
+</div>
