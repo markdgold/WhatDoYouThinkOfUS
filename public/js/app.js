@@ -11,7 +11,7 @@ app.config([
 		$stateProvider
 			.state('home', {
 				url: '/',
-				templateUrl: './views/newsApiReturn.html',
+				templateUrl: './views/home.html',
 				controller: 'ArticlesCtrl'
 			})
 		.state('addCountry', {

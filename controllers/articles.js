@@ -23,6 +23,7 @@ var articleSource = {
 
 router.route('/:source/:number')
 .get(function(req,res){
+
 Country.findOne({title: 'Germany'}, function (err, doc){
 	doc.articles = [];
 
@@ -56,12 +57,13 @@ Country.findOne({title: 'Germany'}, function (err, doc){
     }],
   	function (err, result) {
 
-			// Country.findOne({title: 'Germany'}, function (err, doc){
-			// 	doc.articles.push(result);
-			// 	console.log(doc);
-			// 	doc.save();
- 				res.send(result);
-			// });
+			Country.findOne({title: 'Germany'}, function (err, doc){
+				doc.articles.push(result);
+				console.log(doc);
+				doc.save();
+
+				});
+			res.send(result);
 		});
 });
 
