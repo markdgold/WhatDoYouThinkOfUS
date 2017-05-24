@@ -5,7 +5,11 @@ var CountriesSchema = mongoose.Schema({
     id: String,
     color: String,
     customData: Number,
-    groupId: Number
+    groupId: Number,
+		articles: [{
+			title: String,
+			score: Number
+}]
 });
 
 CountriesSchema.methods.sayHello = function() {
