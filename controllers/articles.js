@@ -50,33 +50,4 @@ router.route('/:source/:number')
 	});
 })
 
-
-
-// .get(function(req,res){
-// 		console.log('article control req');
-// 		request(`https://newsapi.org/v1/articles?source=${req.params.source}&sortBy=latest&apiKey=${newsApi}`, function(error, response, body){
-// 					if (error) console.log(error);
-// 					articleData = body;
-// 					res.send(articleData);
-// 		});
-// })
-
-// .get(function(req,res){
-//   var parameters = {
-//     'url': req.params.url,
-//     'features': {
-//       'sentiment': {},
-//       'emotion': {}
-//     }
-//   };
-//   natural_language_understanding.analyze(parameters, function(err, response) {
-//     if (err)
-//       console.log('error:', err);
-//     else
-//       console.log(JSON.stringify(response, null, 2));
-//       watsonData = JSON.stringify(response, null, 2);
-//   res.send(watsonData);
-//   });
-// })
-
 module.exports = router;

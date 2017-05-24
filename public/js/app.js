@@ -13,7 +13,11 @@ app.config([
 				url: '/',
 				templateUrl: './views/newsApiReturn.html',
 				controller: 'ArticlesCtrl'
-			});
+			})
+		.state('addCountry', {
+			url: '/addcountry',
+			templateUrl: 'app/views/addCountry.html'
+});
 			$locationProvider.html5Mode(true);
 	}
 ]);

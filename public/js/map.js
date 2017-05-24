@@ -48,7 +48,7 @@ var map = AmCharts.makeChart( "chartdiv", {
         "id": "IT",
         "color": "#67b7dc",
         "customData": "1957",
-        "groupId": "before2004"
+        "groupId": "before2000"
       }, {
         "title": "France",
         "id": "FR",
