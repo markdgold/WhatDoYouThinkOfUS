@@ -10,19 +10,20 @@ app.config([
 
 		$stateProvider
 			.state('home', {
-				url: '/',
+				url: '/home',
+				templateUrl: './views/home.html',
+				controller: 'MapsCtrl'
+			})
+			.state('maps', {
+				url: '/maps',
 				templateUrl: './views/maps.html',
 				controller: 'MapsCtrl'
 			})
-		.state('apiCall', {
-	url: '/apiCall',
-	template: '<h1>ApiCalled</h1>',
-	controller: 'ArticlesCtrl'
-	})
-		.state('addCountry', {
-			url: '/addcountry',
-			templateUrl: 'app/views/addCountry.html'
-});
+			.state('apiCall', {
+				url: '/apiCall',
+				template: '<h1>ApiCalled</h1>',
+				controller: 'ArticlesCtrl'
+			});
 			$locationProvider.html5Mode(true);
 	}
 ]);

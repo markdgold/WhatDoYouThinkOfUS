@@ -104,24 +104,24 @@ angular.module('MainCtrls', ['NewsServices'])
 				    "axisThickness": 1,
 				    "axisAlpha": 0.2,
 				    "tickAlpha": 0.2,
-				    "valueInterval": .25,
+				    "valueInterval": 20,
 				    "bands": [ {
 				      "color":  "#cc4748",
-				      "endValue": .75,
+				      "endValue": 33.333,
 				      "startValue": 0
 				    }, {
 				      "color": "#fdd400",
-				      "endValue": 1.25,
-				      "startValue": .75
+				      "endValue": 66.666,
+				      "startValue": 33.333
 				    }, {
 				      "color": "#84b761",
-				      "endValue": 2,
+				      "endValue": 100,
 				      "innerRadius": "95%",
-				      "startValue": 1.25
+				      "startValue": 66.6666
 				    } ],
 				    "bottomText": "Sentiment Score",
 				    "bottomTextYOffset": 20,
-				    "endValue": 2
+				    "endValue": 100
 				  } ],
 				  "arrows": [ {} ],
 				  "export": {
@@ -137,8 +137,8 @@ angular.module('MainCtrls', ['NewsServices'])
 				    if ( gaugeChart.arrows ) {
 				      if ( gaugeChart.arrows[ 0 ] ) {
 				        if ( gaugeChart.arrows[ 0 ].setValue ) {
-				          gaugeChart.arrows[ 0 ].setValue( $scope.gbSentiment + 1 );
-				          gaugeChart.axes[ 0 ].setBottomText( ($scope.gbSentiment + 1) + " Sentiment" );
+				          gaugeChart.arrows[ 0 ].setValue(($scope.gbSentiment + 1) *50);
+				          gaugeChart.axes[ 0 ].setBottomText($scope.gbSentiment + " Sentiment" );
 				        }
 				      }
 				    }
