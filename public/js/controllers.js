@@ -65,13 +65,8 @@ angular.module('MainCtrls', ['NewsServices'])
 			var alJazeera = 'al-jazeera-english';
 
 
-<<<<<<< HEAD
-			ArticlesFactory.get(function success(data){
-				$scope.allArticles=JSON.stringify(data);
-				console.log('success', $scope.allArticles);
-			});
-=======
-				} );
+
+
 
 	}])
 
@@ -90,6 +85,6 @@ angular.module('MainCtrls', ['NewsServices'])
 				console.log('success', $scope.allArticles);
 			});
 
->>>>>>> a69198f40fc1fd3e11d8c23c8bb91674c88fea2f
+
 
 	}]);
