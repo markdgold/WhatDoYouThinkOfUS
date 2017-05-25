@@ -36,6 +36,7 @@ router.route('/:source/:country')
 		// console.log('country------------', country)
 		Country.findOne({title: req.params.country}, function (err, doc){
 			doc.articles = [];
+
 			var articleSource = {
 				source: ""
 			};
@@ -63,7 +64,9 @@ router.route('/:source/:country')
 						    else
 						      var watsonData = response;
 		  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
+
 		  						concatCallback(null, articleWithSent);
+
 						  });
 						},function(err, result){
 							 waterCallbackTwo(null, result);
@@ -77,7 +80,10 @@ router.route('/:source/:country')
 			);
 
 		});
+
+
 	//}
+
 });
 
 
