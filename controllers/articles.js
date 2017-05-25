@@ -78,8 +78,9 @@ router.route('/')
 		    }],
 		  	function (err, result) {
 					console.log('waterfall result', result);
-					doc.articles = result
-					doc.save();
+
+					// doc.articles = result;
+					// doc.save();
 				}
 			);
 

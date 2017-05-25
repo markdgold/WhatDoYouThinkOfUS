@@ -205,7 +205,7 @@ if(!err){
 
 
 
-app.use('/api/europes', require('./controllers/europes'));
+app.use('/api/countries', require('./controllers/countries'));
 app.use('/api/articles', require('./controllers/articles'));
 
 app.get('/*', function(req, res) {
