@@ -4,7 +4,7 @@ angular.module('MainCtrls', ['NewsServices'])
 		$scope.sentiment= 0;
 
 
-			CountriesFactory.get({keyword: 'Trump'}, function success(data){
+			CountriesFactory.get({keyword: 'Manchester'}, function success(data){
 			console.log('Countries success');
 			console.log(data)
 			$scope.germanySentiment = data.Germany;
@@ -12,17 +12,17 @@ angular.module('MainCtrls', ['NewsServices'])
 			 console.log($scope.sentiment);
 // 	$scope.average = data;
 // console.log($scope.average);
-var map = AmCharts.makeChart( "chartdiv", {
+	var map = AmCharts.makeChart( "chartdiv", {
 				  "type": "map",
 				  "theme": "light",
 				  "dataProvider": {
 				    "map": "worldHigh",
-				    "zoomLevel": 3.5,
+				    "zoomLevel": 7,
 				    "zoomLongitude": 10,
 				    "zoomLatitude": 52,
 
 
-				    "areas": [{"title":"Austria","id":"AT","color":$scope.white,"customData": 0,"groupId":2},{"title":"Ireland","id":"IE","color":"#67b7dc","groupId":1},{"title":"Denmark","id":"DK","color":"#67b7dc","groupId":1},{"title":"Finland","id":"FI","color":"#67b7dc","groupId":1},{"title":"Sweden","id":"SE","color":"#67b7dc","groupId":1},{"title":"GreatBritain","id":"GB","color":"#67b7dc","customData": $scope.gbSentiment,"groupId":1},{"title":"Italy","id":"IT","color":"#67b7dc","groupId":3},{"title":"Spain","id":"ES","color":"#67b7dc","groupId":3},{"title":"France","id":"FR","color":"#67b7dc","groupId":2},{"title":"Greece","id":"GR","color":"#67b7dc","groupId":3},{"title":"Germany","id":"DE","color":"#67b7dc","customData": $scope.germanySentiment, "groupId":2},{"title":"Belgium","id":"BE","color":"#67b7dc","groupId":2},{"title":"Netherlands","id":"NL","color":"#67b7dc","groupId":2},{"title":"Luxembourg","id":"LU","color":"#67b7dc","groupId":2},{"title":"Portugal","id":"PT","color":"#67b7dc","groupId":3},{"title":"Lithuania","id":"LT","color":"#ebdb8b","groupId":1},{"title":"Latvia","id":"LV","color":"#ebdb8b","groupId":1},{"title":"CzechRepublic","id":"CZ","color":"#ebdb8b","groupId":4},{"title":"Slovakia","id":"SK","color":"#ebdb8b","groupId":4},{"title":"Slovenia","id":"SI","color":"#ebdb8b","groupId":3},{"title":"Estonia","id":"EE","color":"#ebdb8b","groupId":1},{"title":"Hungary","id":"HU","color":"#ebdb8b","groupId":4},{"title":"Cyprus","id":"CY","color":"#ebdb8b","groupId":3},{"title":"Malta","id":"MT","color":"#ebdb8b","groupId":3},{"title":"Poland","id":"PL","color":"#ebdb8b","groupId":4},{"title":"Romania","id":"RO","color":"#83c2ba","groupId":4},{"title":"Bulgaria","id":"BG","color":"#83c2ba","groupId":4},{"title":"Croatia","id":"HR","color":"#db8353","groupId":3},{"title":"Russia","id":"RU","color":"#db8353","groupId":10}]
+				    "areas": [{"title":"UK","id":"GB","color":"#67b7dc","customData": $scope.gbSentiment,"groupId":1},{"title":"Germany","id":"DE","color":"#67b7dc","customData": $scope.germanySentiment, "groupId":2}]
 
 
 				  },
@@ -47,7 +47,7 @@ var map = AmCharts.makeChart( "chartdiv", {
 				    "horizontalGap": 10,
 				    "data": [ {
 				      "title": "Super cool places",
-				      "color": "#67b7dc"
+				      "color": "lightgrey"
 				    }, {
 				      "title": "That love stuff",
 				      "color": "#ebdb8b"
@@ -63,6 +63,88 @@ var map = AmCharts.makeChart( "chartdiv", {
 				    "enabled": true
 				  }
 			});
+	var chart = AmCharts.makeChart("chartdiv1", {
+    "theme": "light",
+    "type": "serial",
+    "dataProvider": [ {
+        "C": "Germany",
+        "score": $scope.germanySentiment
+    }, {
+        "C": "UK",
+        "score": $scope.gbSentiment
+    }],
+    "valueAxes": [{
+        "title": "Sentiment Score -1 to 1"
+    }],
+    "graphs": [{
+        "balloonText": "Sentiment Score [[value]]",
+        "fillAlphas": 1,
+        "lineAlpha": 0.2,
+        "title": "C",
+        "type": "column",
+        "valueField": "score"
+    }],
+    "depth3D": 80,
+    "angle": 30,
+    "rotate": true,
+    "categoryField": "C",
+    "categoryAxis": {
+        "gridPosition": "start",
+        "fillAlpha": 0.05,
+        "position": "left"
+    },
+    "export": {
+    	"enabled": true
+     }
+});
+var gaugeChart = AmCharts.makeChart( "chartdiv2", {
+  "type": "gauge",
+  "theme": "light",
+  "axes": [ {
+    "axisThickness": 1,
+    "axisAlpha": 0.2,
+    "tickAlpha": 0.2,
+    "valueInterval": .25,
+    "bands": [ {
+      "color":  "#cc4748",
+      "endValue": .75,
+      "startValue": 0
+    }, {
+      "color": "#fdd400",
+      "endValue": 1.25,
+      "startValue": .75
+    }, {
+      "color": "#84b761",
+      "endValue": 2,
+      "innerRadius": "95%",
+      "startValue": 1.25
+    } ],
+    "bottomText": "Sentiment Score",
+    "bottomTextYOffset": 20,
+    "endValue": 2
+  } ],
+  "arrows": [ {} ],
+  "export": {
+    "enabled": true
+  }
+} );
+
+setInterval( randomValue, 2000 );
+
+// set random value
+function randomValue() {
+  if ( gaugeChart ) {
+    if ( gaugeChart.arrows ) {
+      if ( gaugeChart.arrows[ 0 ] ) {
+        if ( gaugeChart.arrows[ 0 ].setValue ) {
+          gaugeChart.arrows[ 0 ].setValue( $scope.gbSentiment + 1 );
+          gaugeChart.axes[ 0 ].setBottomText( ($scope.gbSentiment + 1) + " Sentiment" );
+        }
+      }
+    }
+  }
+}
+
 			});
 
 	}])
