@@ -25,13 +25,19 @@ router.route('/')
 .get(function(req,res){
 	var sources =[
 		{
+			country: 'Germany',
+			newsSource: 'handelsblatt'
+		},
+		{
 			country: 'GreatBritain',
 			newsSource: 'bbc-news'
 		},
 		{
-			country: 'Germany',
-			newsSource: 'handelsblatt'
+			country: 'UnitedStates',
+			newsSource: 'the-new-york-times'
 		}
+
+
 	];
 
 	var sourcesConcatFn = function(source, sourceConcatCallback){
@@ -69,6 +75,13 @@ router.route('/')
 					    else
 					      var watsonData = response;
 	  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
+	  						if(watsonData===undefined){
+	  							console.log('sentiment undefined');
+	  						}
+	  						else{
+	  							doc.articles.push(articleWithSent);
+	  							doc.save();
+	  						}
 	  						concatCallback(null, articleWithSent);
 					  });
 					};
@@ -79,8 +92,8 @@ router.route('/')
 
 			async.waterfall([newsApiFn, watsonFn],function(err, result){
 					console.log('waterfall result', result);
-					doc.articles = result;
-					doc.save();
+					// doc.articles = result;
+					// doc.save();
 			})
 		});
 		sourceConcatCallback(null, country);

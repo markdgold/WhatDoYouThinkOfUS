@@ -6,14 +6,15 @@ router.route('/:keyword')
 .get(function(req, res){
     console.log("hitting contries");
     var germanySum = 0;
+    var usCounter = 0;
+    var usAverage = 0;
+    var usSum = 0;
     var germanyCounter = 0;
     var germanyAverage = 0;
     var gbSum = 0;
     var gbCounter = 0;
     var gbAverage = 0;
     Country.findOne({title: 'Germany'}, (function(err, country){
-        console.log(country);
-
         if (err) return res.status(500).send(err);
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
@@ -27,8 +28,26 @@ router.route('/:keyword')
 
     })).then(function(response){
         console.log('germany average', germanyAverage);
-        //res.send({data: average});
     });
+
+    Country.findOne({title: 'UnitedStates'}, (function(err, country){
+        console.log(country);
+
+        if (err) return res.status(500).send(err);
+        for( var i= 0; i<country.articles.length; i++){
+            if(country.articles[i].title.includes(req.params.keyword)){
+
+                usSum += (country.articles[i].sentiment.document.score);
+                usCounter ++;
+            }
+
+        }
+        usAverage = (usSum/usCounter);
+
+    })).then(function(response){
+        console.log('United States Average', germanyAverage);
+    });
+
     Country.findOne({title: 'GreatBritain'}, (function(err, country){
         console.log(country);
 
@@ -44,12 +63,8 @@ router.route('/:keyword')
         gbAverage = (gbSum/gbCounter);
 
     })).then(function(response){
-        console.log('gb average', gbAverage);
-        res.send({Germany: germanyAverage, GreatBritain: gbAverage});
+        res.send({Germany: germanyAverage, GreatBritain: gbAverage, UnitedStates: usAverage});
     });
-    // console.log(germanyAverage);
-    // res.send({Germany: germanyAverage, GreatBritain: gbAverage});
-
 });
 
 
