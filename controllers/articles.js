@@ -21,24 +21,20 @@ var natural_language_understanding = new NaturalLanguageUnderstandingV1({
 
 
 
-router.route('/')
+router.route('/:source/:country')
 .get(function(req,res){
-
+	console.log(req.params.source)
 	var sources ={
 		'bbc-news': 'GreatBritain',
 		'spiegel-online': 'Germany',
 	};
-
-	// var j=Object.keys(sources);
-	// for(var i=0; i<j; i++){
-
-		var country = sources[Object.keys(sources)[0]];
-		var source =  Object.keys(sources)[0];
-		console.log('source------------', source)
-		console.log('country------------', country)
-		Country.findOne({title: country}, function (err, doc){
-
-
+	//var j=Object.keys(sources).length;
+	//for(var i=0; i<j; i++){
+		// var country = sources[Object.keys(sources)[i]];
+		// var source =  Object.keys(sources)[i];
+		// console.log('source------------', source)
+		// console.log('country------------', country)
+		Country.findOne({title: req.params.country}, function (err, doc){
 			doc.articles = [];
 
 			var articleSource = {
@@ -47,7 +43,7 @@ router.route('/')
 
 			async.waterfall([
 		    function(waterCallbackOne) {
-		        request(`https://newsapi.org/v1/articles?source=${source}&apiKey=${newsApi}`, function(error, response, body){
+		        request(`https://newsapi.org/v1/articles?source=${req.params.source}&apiKey=${newsApi}`, function(error, response, body){
 							if (error) console.log(error);
 							articleSource.source = JSON.parse(response.body).source;
 			        waterCallbackOne(null, JSON.parse(response.body).articles);
