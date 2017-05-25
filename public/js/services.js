@@ -3,5 +3,9 @@ angular.module('NewsServices', ['ngResource'])
     // use the colon syntax to specify the id parameter in the url.
 
         return $resource('/api/articles/:source/:country');
-    }]);
+    }])
+	.factory('CountriesFactory', ['$resource', function($resource){
+
+				return $resource('/api/countries/:keyword');
+}]);
 
