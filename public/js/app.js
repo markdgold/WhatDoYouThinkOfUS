@@ -14,11 +14,11 @@ app.config([
 				templateUrl: './views/newsApiReturn.html',
 				controller: 'MapsCtrl'
 			})
-			.state('apiCall', {
-				url: '/apiCall',
-				template: '<h1>ApiCalled</h1>',
-				controller: 'ArticlesCtrl'
-			})
+		.state('apiCall', {
+	url: '/apiCall',
+	template: '<h1>ApiCalled</h1>',
+	controller: 'ArticlesCtrl'
+	})
 		.state('addCountry', {
 			url: '/addcountry',
 			templateUrl: 'app/views/addCountry.html'
