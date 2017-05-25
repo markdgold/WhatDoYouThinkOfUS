@@ -6,7 +6,7 @@ angular.module('MainCtrls', ['NewsServices'])
 			console.log($scope.searchTerm);
 			$scope.keyword = $scope.searchTerm;
 			mapUpdate();
-		}
+		};
 
 		function mapUpdate(){
 			CountriesFactory.get({keyword: $scope.keyword}, function success(data){
@@ -63,8 +63,88 @@ angular.module('MainCtrls', ['NewsServices'])
 					    "enabled": true
 					  }
 				});
-			});
-		}
+				var chart = AmCharts.makeChart("chartdiv1", {
+				    "theme": "light",
+				    "type": "serial",
+				    "dataProvider": [ {
+				        "C": "Germany",
+				        "score": $scope.germanySentiment
+				    }, {
+				        "C": "UK",
+				        "score": $scope.gbSentiment
+				    }],
+				    "valueAxes": [{
+				        "title": "Sentiment Score -1 to 1"
+				    }],
+				    "graphs": [{
+				        "balloonText": "Sentiment Score [[value]]",
+				        "fillAlphas": 1,
+				        "lineAlpha": 0.2,
+				        "title": "C",
+				        "type": "column",
+				        "valueField": "score"
+				    }],
+				    "depth3D": 80,
+				    "angle": 30,
+				    "rotate": true,
+				    "categoryField": "C",
+				    "categoryAxis": {
+				        "gridPosition": "start",
+				        "fillAlpha": 0.05,
+				        "position": "left"
+				    },
+				    "export": {
+				    	"enabled": true
+				     }
+				});
+				var gaugeChart = AmCharts.makeChart( "chartdiv2", {
+				  "type": "gauge",
+				  "theme": "light",
+				  "axes": [ {
+				    "axisThickness": 1,
+				    "axisAlpha": 0.2,
+				    "tickAlpha": 0.2,
+				    "valueInterval": .25,
+				    "bands": [ {
+				      "color":  "#cc4748",
+				      "endValue": .75,
+				      "startValue": 0
+				    }, {
+				      "color": "#fdd400",
+				      "endValue": 1.25,
+				      "startValue": .75
+				    }, {
+				      "color": "#84b761",
+				      "endValue": 2,
+				      "innerRadius": "95%",
+				      "startValue": 1.25
+				    } ],
+				    "bottomText": "Sentiment Score",
+				    "bottomTextYOffset": 20,
+				    "endValue": 2
+				  } ],
+				  "arrows": [ {} ],
+				  "export": {
+				    "enabled": true
+				  }
+				});
+
+				setInterval( randomValue, 2000 );
+
+				// set random value
+				function randomValue() {
+				  if ( gaugeChart ) {
+				    if ( gaugeChart.arrows ) {
+				      if ( gaugeChart.arrows[ 0 ] ) {
+				        if ( gaugeChart.arrows[ 0 ].setValue ) {
+				          gaugeChart.arrows[ 0 ].setValue( $scope.gbSentiment + 1 );
+				          gaugeChart.axes[ 0 ].setBottomText( ($scope.gbSentiment + 1) + " Sentiment" );
+				        }
+				      }
+				    }
+				  }
+				}
+			})};
 		mapUpdate();
 	}])
 
