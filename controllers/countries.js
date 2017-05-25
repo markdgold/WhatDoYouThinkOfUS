@@ -17,8 +17,7 @@ router.route('/:keyword')
         if (err) return res.status(500).send(err);
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
-                console.log(country.articles[i].source);
-                console.log(country.articles[i].sentiment.document.score);
+
                 germanySum += (country.articles[i].sentiment.document.score);
                 germanyCounter ++;
             }
@@ -36,8 +35,7 @@ router.route('/:keyword')
         if (err) return res.status(500).send(err);
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
-                console.log(country.articles[i].source);
-                console.log(country.articles[i].sentiment.document.score);
+
                 gbSum += (country.articles[i].sentiment.document.score);
                 gbCounter ++;
             }

@@ -4,7 +4,7 @@ angular.module('MainCtrls', ['NewsServices'])
 		$scope.sentiment= 0;
 
 
-			CountriesFactory.get({keyword: 'Nato'}, function success(data){
+			CountriesFactory.get({keyword: 'Trump'}, function success(data){
 			console.log('Countries success');
 			console.log(data)
 			$scope.germanySentiment = data.Germany;
