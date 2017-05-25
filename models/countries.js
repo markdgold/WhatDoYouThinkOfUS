@@ -6,7 +6,7 @@ var CountriesSchema = mongoose.Schema({
     color: String,
     customData: Number,
     groupId: Number,
-		articles: [{}]
+	articles: [{}]
 });
 
 CountriesSchema.set('toJSON', {

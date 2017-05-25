@@ -14,6 +14,7 @@ angular.module('MainCtrls', ['NewsServices'])
 				console.log(data)
 				$scope.germanySentiment = data.Germany;
 				$scope.gbSentiment = data.GreatBritain;
+				$scope.usSentiment = data.UnitedStates;
 				console.log($scope.sentiment);
 
 				var map = AmCharts.makeChart( "chartdiv", {
@@ -24,7 +25,7 @@ angular.module('MainCtrls', ['NewsServices'])
 					    "zoomLevel": 3.5,
 					    "zoomLongitude": 10,
 					    "zoomLatitude": 52,
-					    "areas": [{"title":"GreatBritain","id":"GB","color":"#67b7dc","customData": $scope.gbSentiment,"groupId":1},{"title":"Germany","id":"DE","color":"#67b7dc","customData": $scope.germanySentiment, "groupId":2}]
+					    "areas": [{"title":"UnitedStates","id":"US","color":"#67b7dc","customData": $scope.usSentiment,"groupId":3},{"title":"GreatBritain","id":"GB","color":"#67b7dc","customData": $scope.gbSentiment,"groupId":1},{"title":"Germany","id":"DE","color":"#67b7dc","customData": $scope.germanySentiment, "groupId":2}]
 					  },
 					  "areasSettings": {
 					    "rollOverOutlineColor": "#000000",
