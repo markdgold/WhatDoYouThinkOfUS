@@ -16,14 +16,14 @@ app.use(morgan('dev'));
 mongoose.connect('mongodb://localhost/whatdoyou');
 
 
-Country.find({}, function(err, docs){
-if(!err){
+// Country.find({}, function(err, docs){
+// if(!err){
 
-	 console.log(JSON.stringify(docs));
+// 	 console.log(JSON.stringify(docs));
 
 
-}else {throw err;}
-});
+// }else {throw err;}
+// });
 
 
 // console.log(Country)
