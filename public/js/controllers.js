@@ -54,19 +54,12 @@ angular.module('MainCtrls', ['NewsServices'])
 	}])
 
 	.controller('ArticlesCtrl', ['$scope', 'ArticlesFactory', function($scope, ArticlesFactory){
-			console.log('articlesCtrl')
 			$scope.allArticles = "";
-			var sources = ['al-jazeera-english', 'bbc-news', 'handelsblatt', 'spiegel-online', 'reuters', 'the-hindu', 'abc-news-au', 'the-new-york-times', 'the-times-of-india']
+			//var sources = ['al-jazeera-english', 'bbc-news', 'handelsblatt', 'spiegel-online', 'reuters', 'the-hindu', 'abc-news-au', 'the-new-york-times', 'the-times-of-india']
 
 
-			ArticlesFactory.get({source: sources[1], country: 'GreatBritain'},function success(data){
+			ArticlesFactory.get(function success(data){
 				$scope.allArticles=JSON.stringify(data);
 				console.log('success', $scope.allArticles);
 			});
-			ArticlesFactory.get({source: sources[2], country: 'Germany'},function success(data){
-				$scope.allArticles=JSON.stringify(data);
-				console.log('success', $scope.allArticles);
-			});
-
-
 	}]);

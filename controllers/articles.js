@@ -21,64 +21,110 @@ var natural_language_understanding = new NaturalLanguageUnderstandingV1({
 
 
 
-router.route('/:source/:country')
+router.route('/')
 .get(function(req,res){
-	console.log(req.params.source)
-	var sources ={
-		'bbc-news': 'GreatBritain',
-		'spiegel-online': 'Germany',
-	};
-	//var j=Object.keys(sources).length;
-	//for(var i=0; i<j; i++){
-		// var country = sources[Object.keys(sources)[i]];
-		// var source =  Object.keys(sources)[i];
-		// console.log('source------------', source)
-		// console.log('country------------', country)
-	Country.findOne({title: req.params.country}, function (err, doc){
-		doc.articles = [];
-		var articleSource = {
-			source: ""
-		};
+	var sources =[
+		{
+			country: 'GreatBritain',
+			newsSource: 'bbc-news'
+		},
+		{
+			country: 'Germany',
+			newsSource: 'handelsblatt'
+		}
+	];
 
-		async.waterfall([
-	    function(waterCallbackOne) {
-        request(`https://newsapi.org/v1/articles?source=${req.params.source}&apiKey=${newsApi}`, function(error, response, body){
-					if (error) console.log(error);
-					articleSource.source = JSON.parse(response.body).source;
-	        waterCallbackOne(null, JSON.parse(response.body).articles);
-				});
-	    },
-	    function(articles, waterCallbackTwo){
-	    	var concatFunc = function(article, concatCallback){
-	    		var parameters = {
-				    'url': article.url,
-				    'features': {
-				      'sentiment': {},
-				      'emotion': {}
-				    }
-				  };
-				  natural_language_understanding.analyze(parameters, function(err, response) {
-				    if (err)
-				      console.log('error:', err);
-				    else
-				      var watsonData = response;
-  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
-  						concatCallback(null, articleWithSent);
-				  });
-				};
-	    	async.concat(articles, concatFunc,function(err, result){
-						 waterCallbackTwo(null, result);
+	var sourcesConcatFn = function(source, sourceConcatCallback){
+		var country = source.country;
+		var newsSource = source.newsSource;
+
+		Country.findOne({title: country}, function (err, doc){
+			doc.articles = [];
+			var articleSource = {
+				source: ""
+			};
+
+			var newsApiFn = function(waterCallbackOne) {
+	        request(`https://newsapi.org/v1/articles?source=${newsSource}&apiKey=${newsApi}`,
+	          function(error, response, body){
+							if (error) console.log(error);
+							articleSource.source = JSON.parse(response.body).source;
+		        	waterCallbackOne(null, JSON.parse(response.body).articles);
 					});
-	    }],
-	  	function (err, result) {
-				console.log('waterfall result', result);
-				doc.articles = result;
-				doc.save();
-			}
-		);
+		  };
 
+		  var watsonFn = function(articles, waterCallbackTwo){
+		    	var concatFunc = function(article, concatCallback){
+		    		var parameters = {
+					    'url': article.url,
+					    'features': {
+					      'sentiment': {},
+					      'emotion': {}
+					    }
+					 	};
+					  natural_language_understanding.analyze(parameters, function(err, response) {
+					    if (err)
+					      console.log('error:', err);
+					    else
+					      var watsonData = response;
+	  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
+	  						concatCallback(null, articleWithSent);
+					  });
+					};
+		    	async.concat(articles, concatFunc,function(err, result){
+							 waterCallbackTwo(null, result);
+						});
+		  };
+
+			async.waterfall([newsApiFn, watsonFn],function(err, result){
+					console.log('waterfall result', result);
+					doc.articles = result;
+					doc.save();
+			})
+
+			/*async.waterfall([
+		    function(waterCallbackOne) {
+	        request(`https://newsapi.org/v1/articles?source=${newsSource}&apiKey=${newsApi}`, function(error, response, body){
+						if (error) console.log(error);
+						articleSource.source = JSON.parse(response.body).source;
+		        waterCallbackOne(null, JSON.parse(response.body).articles);
+					});
+		    },
+		    function(articles, waterCallbackTwo){
+		    	var concatFunc = function(article, concatCallback){
+		    		var parameters = {
+					    'url': article.url,
+					    'features': {
+					      'sentiment': {},
+					      'emotion': {}
+					    }
+					  };
+					  natural_language_understanding.analyze(parameters, function(err, response) {
+					    if (err)
+					      console.log('error:', err);
+					    else
+					      var watsonData = response;
+	  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
+	  						concatCallback(null, articleWithSent);
+					  });
+					};
+		    	async.concat(articles, concatFunc,function(err, result){
+							 waterCallbackTwo(null, result);
+						});
+		    }],
+		  	function (err, result) {
+					console.log('waterfall result', result);
+					doc.articles = result;
+					doc.save();
+				}
+			);*/
+
+		});
+		sourceConcatCallback(null, country);
+	};
+	async.concat(sources, sourcesConcatFn, function(err, result){
+		console.log('done')
 	});
-	//}
 });
 
 
