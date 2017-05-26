@@ -16,6 +16,8 @@ router.route('/:keyword')
     var gbAverage = 0
     Country.findOne({title: 'Germany'}, (function(err, country){
         if (err) return res.status(500).send(err);
+        if(!country)
+        return  "hi";
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
                 germanySum += (country.articles[i].sentiment.document.score);
