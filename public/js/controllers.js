@@ -26,7 +26,7 @@ angular.module('MainCtrls', ['NewsServices'])
 					    "zoomLevel": 3.5,
 					    "zoomLongitude": 10,
 					    "zoomLatitude": 52,
-					    "areas": [{"title":"UnitedStates","id":"US","color":"#67b7dc","customData": $scope.usSentiment,"groupId":3},{"title":"GreatBritain","id":"GB","color":"#67b7dc","customData": $scope.gbSentiment,"groupId":1},{"title":"Germany","id":"DE","color":"#67b7dc","customData": $scope.germanySentiment, "groupId":2}]
+					    "areas": [{"title":"UnitedStates","id":"US","color":"blue","customData": $scope.usSentiment,"groupId":3},{"title":"GreatBritain","id":"GB","color":"red","customData": $scope.gbSentiment,"groupId":1},{"title":"Germany","id":"DE","color":"green","customData": $scope.germanySentiment, "groupId":2}]
 					  },
 					  "areasSettings": {
 					    "rollOverOutlineColor": "#000000",
@@ -47,19 +47,6 @@ angular.module('MainCtrls', ['NewsServices'])
 					    "top": 450,
 					    "left": 0,
 					    "horizontalGap": 10,
-					    "data": [ {
-					      "title": "Super cool places",
-					      "color": "#67b7dc"
-					    }, {
-					      "title": "That love stuff",
-					      "color": "#ebdb8b"
-					    }, {
-					      "title": "thats awesome",
-					      "color": "#83c2ba"
-					    }, {
-					      "title": "YEAAA",
-					      "color": "#000000"
-					    } ]
 					  },
 					  "export": {
 					    "enabled": true

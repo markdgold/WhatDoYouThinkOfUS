@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
-mongoose.connect('mongodb://localhost/whatdoyou');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/whatdoyou');
 
 app.use('/api/countries', require('./controllers/countries'));
 app.use('/api/articles', require('./controllers/articles'));
@@ -22,4 +22,4 @@ app.get('/*', function(req, res) {
    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
