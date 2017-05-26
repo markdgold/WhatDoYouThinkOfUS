@@ -5,6 +5,7 @@ var router = express.Router();
 router.route('/:keyword')
 .get(function(req, res){
     console.log("hitting contries");
+
     var gb = {
         sum: 0,
         counter: 0,
@@ -23,9 +24,10 @@ router.route('/:keyword')
         average: 0,
         articles: []
     };
-
     Country.findOne({title: 'Germany'}, (function(err, country){
         if (err) return res.status(500).send(err);
+        if(!country)
+        return  "hi";
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
                 germany.sum += (country.articles[i].sentiment.document.score);
@@ -36,6 +38,7 @@ router.route('/:keyword')
                     title: country.articles[i].title,
                     url: country.articles[i].url
                 });
+
             }
 
         }
