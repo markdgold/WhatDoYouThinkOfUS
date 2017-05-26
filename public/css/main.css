@@ -1,3 +1,7 @@
+html, body {
+	height: 100%;
+}
+
 .chartdiv {
 background-color: white;
 display: inline-block;
@@ -19,7 +23,6 @@ size: 40px;
 
 body {
 	background-color: grey;
-
 }
 
 .image-stuff {
@@ -30,3 +33,58 @@ body {
 	width: 50%;
 }
 
+#error-page {
+	height: 500px
+}
+
+#keyword-info{
+/*	position: absolute;
+	left: 0;*/
+}
+
+div.articles{
+	background: grey;
+	z-index: 100000;
+}
+.dropbtnCss {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 0px;
+
+}
+
+.dropdownCss {
+    position: relative;
+    display: inline-block;
+      width: 100%
+}
+
+.dropdown-contentCss {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-contentCss a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    width: 100%
+}
+
+.dropdown-contentCss a:hover {background-color: #f1f1f1}
+
+.dropdownCss:hover .dropdown-contentCss {
+    display: block;
+}
+
+.dropdownCss:hover .dropbtnCss {
+    background-color: #3e8e41;
+}

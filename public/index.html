@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>What Do You Think of US</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-resource.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js"></script>
@@ -16,53 +17,35 @@
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>
     <script src="https://www.amcharts.com/lib/3/gauge.js"></script>
     <script src="https://www.amcharts.com/lib/3/pie.js"></script>
-<script src="https://www.amcharts.com/lib/3/ammap_amcharts_extension.js"></script>
-
+    <script src="https://www.amcharts.com/lib/3/ammap_amcharts_extension.js"></script>
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
-
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- Latest compiled and minified CSS & JS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-
-
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
     </head>
     <body>
-
-    <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
-</ul>
-<nav class="blue">
-  <div class="nav-wrapper">
-    <a href="/home" class="brand-logo">WhatDoYouThinkOfUS</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="/home">Home</a></li>
-      <li><a href="/maps">Maps</a></li>
-      <!-- Dropdown Trigger -->
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
-</nav>
-
-
+      <nav class="blue">
+        <div class="nav-wrapper">
+          <a href="/home" class="brand-logo">WhatDoYouThinkOfUS</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/maps">Maps</a></li
+          </ul>
+        </div>
+      </nav>
 
    		<div ui-view></div>
 
-<!-- <div class="charts">
- <div id="chartdiv"></div>
-<div id="chartdiv1"></div>
-<div id="chartdiv2"></div>
-</div> -->
- <footer class="page-footer">
+        <footer class="page-footer">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">

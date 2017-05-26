@@ -28,6 +28,10 @@ app.config([
 				url: '/apiCall',
 				template: '<h1>ApiCalled</h1>',
 				controller: 'ArticlesCtrl'
+			})
+			.state('404', {
+				url: '/404',
+				templateUrl: './views/404.html'
 			});
 			$locationProvider.html5Mode(true);
 	}
