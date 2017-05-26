@@ -8,6 +8,13 @@ border: 10px solid lightblue;
 
 }
 
+#backg {
+	background-color: lightgrey;
+	border: 2px solid teal;
+	color: white;
+size: 40px;
+}
+
 
 
 body {

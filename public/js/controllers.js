@@ -79,7 +79,7 @@ angular.module('MainCtrls', ['NewsServices'])
 								"score": $scope.usSentiment
 
 						}, {
-								"C": "Composite Sentiment",
+								"C": "Composite",
 								 "score": $scope.totalSentiment
 
 						}],
