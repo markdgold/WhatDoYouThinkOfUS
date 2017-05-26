@@ -9,6 +9,11 @@ app.config([
 		$urlRouterProvider.otherwise('/404');
 
 		$stateProvider
+			.state('/', {
+				url: '/',
+				templateUrl: './views/home.html',
+				controller: 'MapsCtrl'
+			})
 			.state('home', {
 				url: '/home',
 				templateUrl: './views/home.html',
