@@ -7,7 +7,6 @@ var app = express();
 var Country = require('./models/countries');
 var morgan = require('morgan');
 
-
 var mongoose = require('mongoose');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Pamadon/WhatDoYouThinkOfUS#readme",
   "dependencies": {
+    "angular-materialize": "^0.2.2",
     "async": "^2.4.1",
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",

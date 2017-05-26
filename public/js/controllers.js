@@ -1,7 +1,7 @@
 angular.module('MainCtrls', ['NewsServices'])
 
 	.controller('MapsCtrl', ['$scope','CountriesFactory', function($scope, CountriesFactory){
-		$scope.keyword = "Trump";
+		$scope.keyword = "Manchester";
 		$scope.search = function(){
 			console.log($scope.searchTerm);
 			$scope.keyword = $scope.searchTerm;
@@ -12,11 +12,31 @@ angular.module('MainCtrls', ['NewsServices'])
 			CountriesFactory.get({keyword: $scope.keyword}, function success(data){
 				console.log('Countries success');
 				console.log(data);
-				$scope.germanySentiment = data.Germany;
-				$scope.gbSentiment = data.GreatBritain;
-				$scope.usSentiment = data.UnitedStates;
-				$scope.totalSentiment = (data.Germany + data.GreatBritain+ data.UnitedStates)/3;
-				console.log($scope.totalSentiment);
+				console.log(data.UnitedStates.average)
+				$scope.germanySentiment = data.Germany.average;
+				$scope.germanyArticles = data.Germany.articles;
+				$scope.gbSentiment = data.GreatBritain.average;
+				$scope.gbArticles = data.GreatBritain.articles;
+				$scope.usSentiment = data.UnitedStates.average;
+				$scope.usArticles = data.UnitedStates.articles;
+
+				$scope.totalSentiment = 0;
+				$scope.numberSourcesWithSentiment = 0;
+				if($scope.germanySentiment!==null){
+					$scope.totalSentiment += $scope.germanySentiment;
+					$scope.numberSourcesWithSentiment++;
+				}
+				if($scope.gbSentiment!==null){
+					$scope.totalSentiment += $scope.gbSentiment;
+					$scope.numberSourcesWithSentiment++;
+				}
+				if($scope.usSentiment!==null){
+					$scope.totalSentiment += $scope.usSentiment;
+					$scope.numberSourcesWithSentiment++;
+				}
+
+				$scope.averageTotalSentiment = $scope.totalSentiment/$scope.numberSourcesWithSentiment;
+				console.log($scope.averageTotalSentiment);
 
 				var map = AmCharts.makeChart( "chartdiv", {
 					  "type": "map",
@@ -35,7 +55,7 @@ angular.module('MainCtrls', ['NewsServices'])
 					    "unlistedAreasAlpha": 0.1,
 					    "balloonText": "[[title]] has a Sentiment value of [[customData]] about "+$scope.keyword
 					  },
-					  "legend": {
+/*					  "legend": {
 					    "width": "100%",
 					    "marginRight": 27,
 					    "marginLeft": 27,
@@ -60,7 +80,7 @@ angular.module('MainCtrls', ['NewsServices'])
 					      "title": "YEAAA",
 					      "color": "#000000"
 					    } ]
-					  },
+					  },*/
 					  "export": {
 					    "enabled": true
 					  }
@@ -80,7 +100,7 @@ angular.module('MainCtrls', ['NewsServices'])
 
 						}, {
 								"C": "Composite",
-								 "score": $scope.totalSentiment
+								 "score": $scope.averageTotalSentiment
 
 						}],
 				    "valueAxes": [{
@@ -107,7 +127,7 @@ angular.module('MainCtrls', ['NewsServices'])
 				    	"enabled": true
 				     }
 				});
-				var gaugeChart = AmCharts.makeChart( "chartdiv2", {
+				var gaugeChartUk = AmCharts.makeChart( "chartdiv2", {
 				  "type": "gauge",
 				  "theme": "light",
 				  "axes": [ {
@@ -126,7 +146,7 @@ angular.module('MainCtrls', ['NewsServices'])
 				    }, {
 				      "color": "#84b761",
 				      "endValue": 100,
-				      "innerRadius": "95%",
+				      // "innerRadius": "95%",
 				      "startValue": 66.6666
 				    } ],
 				    "bottomText": "Sentiment Score",
@@ -138,22 +158,110 @@ angular.module('MainCtrls', ['NewsServices'])
 				    "enabled": true
 				  }
 				});
-
-				setInterval( randomValue, 2000 );
+				var gaugeChartGermany = AmCharts.makeChart( "chartdiv3", {
+				  "type": "gauge",
+				  "theme": "light",
+				  "axes": [ {
+				    "axisThickness": 1,
+				    "axisAlpha": 0.2,
+				    "tickAlpha": 0.2,
+				    "valueInterval": 20,
+				    "bands": [ {
+				      "color":  "#cc4748",
+				      "endValue": 33.333,
+				      "startValue": 0
+				    }, {
+				      "color": "#fdd400",
+				      "endValue": 66.666,
+				      "startValue": 33.333
+				    }, {
+				      "color": "#84b761",
+				      "endValue": 100,
+				      // "innerRadius": "95%",
+				      "startValue": 66.6666
+				    } ],
+				    "bottomText": "Sentiment Score",
+				    "bottomTextYOffset": 20,
+				    "endValue": 100
+				  } ],
+				  "arrows": [ {} ],
+				  "export": {
+				    "enabled": true
+				  }
+				});
+				var gaugeChartUs = AmCharts.makeChart( "chartdiv4", {
+				  "type": "gauge",
+				  "theme": "light",
+				  "axes": [ {
+				    "axisThickness": 1,
+				    "axisAlpha": 0.2,
+				    "tickAlpha": 0.2,
+				    "valueInterval": 20,
+				    "bands": [ {
+				      "color":  "#cc4748",
+				      "endValue": 33.333,
+				      "startValue": 0
+				    }, {
+				      "color": "#fdd400",
+				      "endValue": 66.666,
+				      "startValue": 33.333
+				    }, {
+				      "color": "#84b761",
+				      "endValue": 100,
+				      // "innerRadius": "95%",
+				      "startValue": 66.6666
+				    } ],
+				    "bottomText": "Sentiment Score",
+				    "bottomTextYOffset": 20,
+				    "endValue": 100
+				  } ],
+				  "arrows": [ {} ],
+				  "export": {
+				    "enabled": true
+				  }
+				});
+				setInterval( randomValueUk, 2000 );
+				setInterval( randomValueGermany, 2000 );
+				setInterval( randomValueUs, 2000 );
 
 				// set random value
-				function randomValue() {
-				  if ( gaugeChart ) {
-				    if ( gaugeChart.arrows ) {
-				      if ( gaugeChart.arrows[ 0 ] ) {
-				        if ( gaugeChart.arrows[ 0 ].setValue ) {
-				          gaugeChart.arrows[ 0 ].setValue(($scope.gbSentiment + 1) *50);
-				          gaugeChart.axes[ 0 ].setBottomText($scope.gbSentiment + " Sentiment" );
+				function randomValueUk() {
+				  if ( gaugeChartUk ) {
+				    if ( gaugeChartUk.arrows ) {
+				      if ( gaugeChartUk.arrows[ 0 ] ) {
+				        if ( gaugeChartUk.arrows[ 0 ].setValue ) {
+				          gaugeChartUk.arrows[ 0 ].setValue(($scope.gbSentiment + 1) *50);
+				          gaugeChartUk.axes[ 0 ].setBottomText($scope.gbSentiment + " Sentiment" );
 				        }
 				      }
 				    }
 				  }
 				}
+				function randomValueGermany() {
+				  if ( gaugeChartGermany ) {
+				    if ( gaugeChartGermany.arrows ) {
+				      if ( gaugeChartGermany.arrows[ 0 ] ) {
+				        if ( gaugeChartGermany.arrows[ 0 ].setValue ) {
+				          gaugeChartGermany.arrows[ 0 ].setValue(($scope.germanySentiment + 1) *50);
+				          gaugeChartGermany.axes[ 0 ].setBottomText($scope.germanySentiment + " Sentiment" );
+				        }
+				      }
+				    }
+				  }
+				}
+				function randomValueUs() {
+				  if ( gaugeChartUs ) {
+				    if ( gaugeChartUs.arrows ) {
+				      if ( gaugeChartUs.arrows[ 0 ] ) {
+				        if ( gaugeChartUs.arrows[ 0 ].setValue ) {
+				          gaugeChartUs.arrows[ 0 ].setValue(($scope.usSentiment + 1) *50);
+				          gaugeChartUs.axes[ 0 ].setBottomText($scope.usSentiment + " Sentiment" );
+				        }
+				      }
+				    }
+				  }
+				}
+
 			})};
 
 		mapUpdate();

@@ -9,6 +9,11 @@ app.config([
 		$urlRouterProvider.otherwise('/404');
 
 		$stateProvider
+			.state('/', {
+				url: '/',
+				templateUrl: './views/home.html',
+				controller: 'MapsCtrl'
+			})
 			.state('home', {
 				url: '/home',
 				templateUrl: './views/home.html',
@@ -23,6 +28,10 @@ app.config([
 				url: '/apiCall',
 				template: '<h1>ApiCalled</h1>',
 				controller: 'ArticlesCtrl'
+			})
+			.state('404', {
+				url: '/404',
+				templateUrl: './views/404.html'
 			});
 			$locationProvider.html5Mode(true);
 	}
