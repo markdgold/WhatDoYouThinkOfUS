@@ -13,13 +13,14 @@ router.route('/:keyword')
     var germanyAverage = 0;
     var gbSum = 0;
     var gbCounter = 0;
-    var gbAverage = 0;
+    var gbAverage = 0
     Country.findOne({title: 'Germany'}, (function(err, country){
         if (err) return res.status(500).send(err);
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
                 germanySum += (country.articles[i].sentiment.document.score);
                 germanyCounter ++;
+                console.log(country.articles[i].sentiment.document.score)
             }
 
         }

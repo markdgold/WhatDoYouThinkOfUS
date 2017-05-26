@@ -15,8 +15,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/whatdoyou');
 
+ Country.find({},  function(err ,response){
+ 	console.log(JSON.stringify(response));
+ });
+
 app.use('/api/countries', require('./controllers/countries'));
 app.use('/api/articles', require('./controllers/articles'));
+
 
 app.get('/*', function(req, res) {
    res.sendFile(path.join(__dirname, 'public/index.html'));
