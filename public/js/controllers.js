@@ -33,7 +33,7 @@ angular.module('MainCtrls', ['NewsServices'])
 					    "rollOverColor": "#CC0000",
 					    "alpha": 0.8,
 					    "unlistedAreasAlpha": 0.1,
-					    "balloonText": "[[title]] has a US Sentiment value of [[customData]] about "+$scope.keyword
+					    "balloonText": "[[title]] has a Sentiment value of [[customData]] about "+$scope.keyword
 					  },
 					  "legend": {
 					    "width": "100%",

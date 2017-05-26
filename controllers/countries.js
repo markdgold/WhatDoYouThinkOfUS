@@ -5,11 +5,6 @@ var router = express.Router();
 router.route('/:keyword')
 .get(function(req, res){
     console.log("hitting contries");
-    var gerSenArray = [];
-    console.log("hi");
-    console.log(gerSenArray);
-    var gbSenArray = [];
-    var usSenArray = [];
     var germanySum = 0;
     var usCounter = 0;
     var usAverage = 0;
@@ -23,7 +18,6 @@ router.route('/:keyword')
         if (err) return res.status(500).send(err);
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
-                gerSenArray += (country.articles[i].sentiment.document.score);
                 germanySum += (country.articles[i].sentiment.document.score);
                 germanyCounter ++;
             }
@@ -41,7 +35,6 @@ router.route('/:keyword')
         if (err) return res.status(500).send(err);
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
-                usSenArray += (country.articles[i].sentiment.document.score);
                 usSum += (country.articles[i].sentiment.document.score);
                 usCounter ++;
             }
@@ -59,7 +52,6 @@ router.route('/:keyword')
         if (err) return res.status(500).send(err);
         for( var i= 0; i<country.articles.length; i++){
             if(country.articles[i].title.includes(req.params.keyword)){
-                gbSenArray += (country.articles[i].sentiment.document.score);
                 gbSum += (country.articles[i].sentiment.document.score);
                 gbCounter ++;
             }

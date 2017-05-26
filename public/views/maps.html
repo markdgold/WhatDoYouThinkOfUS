@@ -1,11 +1,17 @@
-<div>
-<h1>Maps page</h1>
-<form ng-submit=search() class='center'>
-	<label>Enter Search Term</label>
-	<input type="" name="keyword" ng-model="searchTerm">
-	<input type="submit" value="submit">>Search</button>
-</form>
-<div id="chartdiv" class="chartdiv"></div>
-<div id="chartdiv2" class="chartdiv"></div>
-<div id="chartdiv1" class="chartdiv"></div>
+<div class="container">
+	<div class="row">
+		<form ng-submit=search() class='center'>
+			<div class="input-field col s12  text-center">
+				<input type="text" class=" lightblue" name="keyword" ng-model="searchTerm">
+			</div>
+		<button type="submit" value="submit" class="waves-effect waves-orange btn-large orange pulse">Search</button>
+		</form>
+
+
+
+		<div id="chartdiv" class="chartdiv z-depth-3"></div>
+		<div id="chartdiv2" class="chartdiv right-align z-depth-3"></div>
+		<div id="chartdiv1" class="chartdiv left-align z-depth-3"></div>
+
 </div>
+
