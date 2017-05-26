@@ -11,11 +11,12 @@ angular.module('MainCtrls', ['NewsServices'])
 		function mapUpdate(){
 			CountriesFactory.get({keyword: $scope.keyword}, function success(data){
 				console.log('Countries success');
-				console.log(data)
+				console.log(data);
 				$scope.germanySentiment = data.Germany;
 				$scope.gbSentiment = data.GreatBritain;
 				$scope.usSentiment = data.UnitedStates;
-				console.log($scope.sentiment);
+				$scope.totalSentiment = (data.Germany + data.GreatBritain+ data.UnitedStates)/3;
+				console.log($scope.totalSentiment);
 
 				var map = AmCharts.makeChart( "chartdiv", {
 					  "type": "map",
@@ -73,7 +74,15 @@ angular.module('MainCtrls', ['NewsServices'])
 				    }, {
 				        "C": "UK",
 				        "score": $scope.gbSentiment
-				    }],
+				    }, {
+								"C": "US",
+								"score": $scope.usSentiment
+
+						}, {
+								"C": "Composite Sentiment",
+								 "score": $scope.totalSentiment
+
+						}],
 				    "valueAxes": [{
 				        "title": "Sentiment Score -1 to 1"
 				    }],
@@ -146,6 +155,7 @@ angular.module('MainCtrls', ['NewsServices'])
 				  }
 				}
 			})};
+
 		mapUpdate();
 	}])
 
