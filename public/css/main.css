@@ -12,6 +12,10 @@ border: 10px solid lightblue;
 
 }
 
+a {
+color: white;
+}
+
 #backg {
 	background-color: lightgrey;
 	border: 2px solid teal;
