@@ -70,11 +70,11 @@ router.route('/')
 					    }
 					 	};
 					  natural_language_understanding.analyze(parameters, function(err, response) {
+					    var watsonData = response;
+  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
 					    if (err)
 					      console.log('error:', err);
 					    else
-					      var watsonData = response;
-	  						var articleWithSent =Object.assign({}, articleSource, article, watsonData);
 	  						if(watsonData===undefined){
 	  							console.log('sentiment undefined');
 	  						}
@@ -94,7 +94,7 @@ router.route('/')
 					console.log('waterfall result', result);
 					// doc.articles = result;
 					// doc.save();
-			})
+			});
 		});
 		sourceConcatCallback(null, country);
 	};
