@@ -1,2 +1,2 @@
 # WhatDoYouThinkOfUS
-Heat map of global perception of the US
+Heat map of global perception of the USa
