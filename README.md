@@ -38,7 +38,7 @@
 <ul>Follow Steps:
     <li>Fork and/or clone REPO.</li>
     <li>Run "npm install" in your terminal</li>
-    <li>Run Mongod: to ensure they data as a place to go</li>
-		<li>Retireve API keys from both NEWSAPI and WATSON NATURAL LANGUAGE</li>
-    <li>Create a .env file and populate it with your keys making sure they look like KEY_NAME="KEY".</li>
+    <li>Run Mongod: to ensure the data as a place to go</li>
+		<li>Retireve API keys from both <a href="https://newsapi.org/">NEWSAPI</a> and <a href="https://www.ibm.com/watson/developercloud/natural-language-understanding.html">WATSON NATURAL LANGUAGE</a></li>
+    <li>Create a .env file and populate it with your keys making sure they look like this: KEY_NAME="KEY".</li>
 </ul>
