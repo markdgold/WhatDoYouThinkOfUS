@@ -25,6 +25,14 @@ size: 40px;
 
 
 
+
+
+
+.full-image {
+    display: flex;
+}
+
+
 body {
 	background-color: grey;
 }
