@@ -13,7 +13,7 @@
 <li>AMcharts.js: used to visual the data we collected</li>
 </ol>
 
-<h2>>Use Cases/User Stories:</h2>
+<h2>Use Cases/User Stories:</h2>
 <ul>
 <li>Informed daily Consumer: Many individuals consume media from many  sources in a single day. It is possible that without your knowledge you are being subjected to a specific view point and do not even know that you dont see the other side. By checking the sentiment score for a topic you frequently read from the sources your typically go to it will be possible to identify if they lean positive or negative on the subject to illuminate for you reader whether or not they are recieving a balanced view.   </li>
 <li>Bloggers: Bloggers highlighting the differences between reporting styles and rhetoric could download our graphs as examples of the sources proclivity to report on an issue in a certain way. By continuing to grab the graphs they build a detailed timeline for a specific sources movement more negative or positive reporting.  </li>
@@ -41,4 +41,7 @@
     <li>Run Mongod: to ensure the data as a place to go</li>
 		<li>Retireve API keys from both <a href="https://newsapi.org/">NEWSAPI</a> and <a href="https://www.ibm.com/watson/developercloud/natural-language-understanding.html">WATSON NATURAL LANGUAGE</a></li>
     <li>Create a .env file and populate it with your keys making sure they look like this: KEY_NAME="KEY".</li>
+		<li>Run Nodemon</li>
 </ul>
+
+<h3>Thank you for viewing our project and we hope you enjoyed it!</h3>
