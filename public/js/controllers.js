@@ -1,7 +1,7 @@
 angular.module('MainCtrls', ['NewsServices'])
 
 	.controller('MapsCtrl', ['$scope','CountriesFactory', function($scope, CountriesFactory){
-		$scope.keyword = "Manchester";
+		$scope.keyword = "Trump";
 		$scope.search = function(){
 			console.log($scope.searchTerm);
 			$scope.keyword = $scope.searchTerm;
@@ -11,13 +11,14 @@ angular.module('MainCtrls', ['NewsServices'])
 		function mapUpdate(){
 			CountriesFactory.get({keyword: $scope.keyword}, function success(data){
 				console.log('Countries success');
-				console.log(data);
-				console.log(data.UnitedStates.average)
-				$scope.germanySentiment = data.Germany.average;
-				$scope.germanyArticles = data.Germany.articles;
-				$scope.gbSentiment = data.GreatBritain.average;
-				$scope.gbArticles = data.GreatBritain.articles;
-				$scope.usSentiment = data.UnitedStates.average;
+				console.log(data.UnitedStates);
+				console.log(data.UnitedStates.average);
+				// $scope.germanySentiment = data.Germany.average;
+				// $scope.germanyArticles = data.Germany.articles;
+				// $scope.gbSentiment = data.GreatBritain.average;
+				// $scope.gbArticles = data.GreatBritain.articles;
+				$scope.usSentiment = (data.UnitedStates.average*100).toPrecision(3);
+				// $scope.usSentiment = data.UnitedStates.average;
 				$scope.usArticles = data.UnitedStates.articles;
 
 				$scope.totalSentiment = 0;
@@ -36,16 +37,16 @@ angular.module('MainCtrls', ['NewsServices'])
 				}
 
 				$scope.averageTotalSentiment = $scope.totalSentiment/$scope.numberSourcesWithSentiment;
-				console.log($scope.averageTotalSentiment);
+				// console.log($scope.averageTotalSentiment);
 
 				var map = AmCharts.makeChart( "chartdiv", {
 					  "type": "map",
 					  "theme": "light",
 					  "dataProvider": {
 					    "map": "worldHigh",
-					    "zoomLevel": 3.5,
-					    "zoomLongitude": 10,
-					    "zoomLatitude": 52,
+					    "zoomLevel": 4.9,
+					    "zoomLongitude": -95,
+					    "zoomLatitude": 37,
 					    "areas": [{"title":"UnitedStates","id":"US","color":"blue","customData": $scope.usSentiment,"groupId":3},{"title":"GreatBritain","id":"GB","color":"red","customData": $scope.gbSentiment,"groupId":1},{"title":"Germany","id":"DE","color":"green","customData": $scope.germanySentiment, "groupId":2}]
 					  },
 					  "areasSettings": {

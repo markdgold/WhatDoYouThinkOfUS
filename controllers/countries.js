@@ -34,6 +34,10 @@ router.route('/:keyword')
         Country.findOne({title: countryFromArray.country}, (function(err, country){
             if (err) return res.status(500).send(err);
             for( var i= 0; i<country.articles.length; i++){
+                console.log('country', countryFromArray.country)
+                console.log(country.articles[i].title)
+                console.log(country.articles[i].sentiment.document.score)
+                console.log('------------------');
                 if(country.articles[i].title.includes(req.params.keyword)){
                     countryFromArray.sum += (country.articles[i].sentiment.document.score);
                     countryFromArray.counter++;
@@ -52,6 +56,7 @@ router.route('/:keyword')
     };
 
     async.concat(countries,filterArticles, function(err, result){
+        console.log(countries[1])
         res.send({Germany: countries[0], GreatBritain: countries[1], UnitedStates: countries[2]});
     });
 });

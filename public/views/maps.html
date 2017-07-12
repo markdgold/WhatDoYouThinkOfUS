@@ -2,13 +2,17 @@
 	<div class="row">
 		<form ng-submit=search() class='center'>
 			<div class="input-field col s12  text-center">
-				<input type="text" id="backg" class=" lightblue" name="keyword" ng-model="searchTerm">
+				<input type="text" id="backg" class="lightblue" name="keyword" placeholder="Enter Search Term" ng-model="searchTerm">
 			</div>
 		<button type="submit" value="submit" class="waves-effect waves-orange btn-large orange">Search</button>
 		</form>
 
 		<div class="dropdownCss center articles" id="keyword-info" >
-			<h3 class="dropbtnCss">Searched for: {{keyword}}</h3>
+			<h3 class="dropbtnCss">
+				Searched for: {{keyword}}
+				<br>
+				&#9660
+			</h3>
 			<div class="dropdown-contentCss articles">
 
 				<div class="card" ng-repeat="article in germanyArticles">
@@ -28,13 +32,7 @@
 
 
 		<div id="chartdiv" class="chartdiv z-depth-3"></div>
-		<h3>Uk Sentiment</h3>
-		<div id="chartdiv2" class="chartdiv right-align z-depth-3"></div>
-		<h3>Germany Sentiment</h3>
-		<div id="chartdiv3" class="chartdiv right-align z-depth-3"></div>
-		<h3>US Sentiment</h3>
-		<div id="chartdiv4" class="chartdiv right-align z-depth-3"></div>
-		<div id="chartdiv1" class="chartdiv left-align z-depth-3"></div>
+
 
 </div>
 
